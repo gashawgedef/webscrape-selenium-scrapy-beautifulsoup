@@ -1,5 +1,5 @@
 import scrapy
-
+from spider_tutorial.items import SpiderTutorialItem
 class AudibleSpider(scrapy.Spider):
     name = "audible"
     allowed_domains = ["audible.com"]
@@ -8,7 +8,7 @@ class AudibleSpider(scrapy.Spider):
     def parse(self, response):
         # Select the product container using the correct CSS selector
         product_container = response.css('div.adbl-impression-container > div > span > ul > li.bc-list-item')
-        
+        item =SpiderTutorialItem()
         for product in product_container:
             # Extract the details from each product (li element)
             book_author = product.css('li.authorLabel > span > a::text').getall()
